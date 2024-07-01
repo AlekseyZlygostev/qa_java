@@ -29,14 +29,13 @@ public class LionTest {
         };
     }
 
-
     @Test
     public void testDoesHaveMane() {
 
         boolean haveMane = false;
 
         try {
-            Lion lion = new Lion(sex);
+            Lion lion = new Lion(sex, feline);
             haveMane = lion.doesHaveMane();
         } catch (Exception exception) {
             haveMane = false;
@@ -44,19 +43,19 @@ public class LionTest {
         assertEquals(hasMane, haveMane);
     }
 
-    @Spy
+    @Mock
     Feline feline;
 
     @Test
-    public void testGetKittens(){
-        Lion lion = new Lion(feline);
+    public void testGetKittens() throws Exception {
+        Lion lion = new Lion("Самец", feline);
         lion.getKittens();
         Mockito.verify(feline).getKittens();
     }
 
     @Test
     public void testGetFood() throws Exception {
-        Lion lion = new Lion(feline);
+        Lion lion = new Lion("Самец", feline);
         lion.getFood();
         Mockito.verify(feline).getFood("Хищник");
     }
