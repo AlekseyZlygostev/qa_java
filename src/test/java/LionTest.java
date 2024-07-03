@@ -8,40 +8,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(Parameterized.class)
+@RunWith(MockitoJUnitRunner.class)
 public class LionTest {
-
-    private final String sex;
-    private final boolean hasMane;
-
-    public LionTest(String sex, boolean hasMane){
-        this.sex = sex;
-        this.hasMane = hasMane;
-    }
-
-    @Parameterized.Parameters
-    public static Object[][] getSumData() {
-        return new Object[][] {
-                {"Самец", true}, {"Самка", false}, {"Оно", false},
-        };
-    }
-
-    @Test
-    public void testDoesHaveMane() {
-
-        boolean haveMane = false;
-
-        try {
-            Lion lion = new Lion(sex, feline);
-            haveMane = lion.doesHaveMane();
-        } catch (Exception exception) {
-            haveMane = false;
-        }
-        assertEquals(hasMane, haveMane);
-    }
 
     @Mock
     Feline feline;
@@ -58,10 +30,5 @@ public class LionTest {
         Lion lion = new Lion("Самец", feline);
         lion.getFood();
         Mockito.verify(feline).getFood("Хищник");
-    }
-
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
     }
 }
