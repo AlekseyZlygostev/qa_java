@@ -1,14 +1,19 @@
 import com.example.Feline;
 import com.example.Lion;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class LionTestParam {
+
     private final String sex;
     private final boolean hasMane;
 
@@ -20,7 +25,7 @@ public class LionTestParam {
     @Parameterized.Parameters
     public static Object[][] getSumData() {
         return new Object[][] {
-                {"Самец", true}, {"Самка", false}, {"Оно", false},
+                {"Самка", false}, {"Самец", true}, {"Оно", false},
         };
     }
 
@@ -38,7 +43,13 @@ public class LionTestParam {
         } catch (Exception exception) {
             haveMane = false;
         }
+        //System.out.println(sex);
         assertEquals(hasMane, haveMane);
+    }
+
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
     }
 
 }
